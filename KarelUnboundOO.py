@@ -112,7 +112,7 @@ class Robot:
   
     def move(self):  # add check for when the wall is gone -- that changes the message.
         if self.heading == 0: # move east if possible
-            if self.xpos < self.width:
+            if self.xpos < self.wide:
                 self.xpos += 1
             else:
                 post_message("Karel has crashed into a wall!")
@@ -135,11 +135,11 @@ class Robot:
 # define world class
 class World:
 
-    def __init__(self, aframe: Canvas, width: int=6, height: int=6):
-        self._width = width
-        self._height = height
+    def __init__(self, aframe: Canvas, wide: int=6, high: int=6):
+        self._wide = wide
+        self.high = height
         self.aframe = aframe
-        self.world = makeworld(width, height)
+        self.world = makeworld(wide, high)
         self.draw_world()
         self.aframe.bind("<Button-1>", self.follow)
 
@@ -205,20 +205,20 @@ class World:
                     print("null")  
                     
     @property
-    def width(self):
-        return self._width
+    def wide(self):
+        return self._wide
     
     @width.setter
-    def width(self, width: int):
-        self._width = width
-        self.world = makeworld(self._width, self._height)
+    def wide(self, wide: int):
+        self._wide = wide
+        self.world = makeworld(self._wide, self._high)
         self.draw_world()
     
-    def set_width(self, width):
-        self.width = width
+    def set_wide(self, wide):
+        self.wide = wide
     
     def set_height(self, height):
-        self.height = height
+        self.high = high
 
     def hurdles(self):
         'set up challenge'
@@ -252,9 +252,9 @@ class World:
         return self._height
     
     @height.setter
-    def height(self, height: int):
-        self._height = height
-        self.world = makeworld(self._width, self._height)
+    def height(self, high: int):
+        self._high = high
+        self.world = makeworld(self._wide, self._high)
         self.draw_world()
 
 def mysolution(karel: Robot):
@@ -265,7 +265,7 @@ def setup():
     aframe = Canvas(window, width = 800, height = 900)  # create a region for drawing
     aframe.pack(side = BOTTOM)
     world = World(aframe)
-    karel = Robot(aframe, 0, 1, world.height, world.width)
+    karel = Robot(aframe, 0, 1, world.height, world.wide)
     karel.draw()
     
     #set up menus
