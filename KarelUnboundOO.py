@@ -248,11 +248,11 @@ class World:
         'set up challenge'
 
     @property
-    def height(self):
-        return self._height
+    def high(self):
+        return self._high
     
-    @height.setter
-    def height(self, high: int):
+    @high.setter
+    def high(self, high: int):
         self._high = high
         self.world = makeworld(self._wide, self._high)
         self.draw_world()
